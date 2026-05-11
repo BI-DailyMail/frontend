@@ -6,9 +6,15 @@ import MailInput from '../components/features/dashboard/MailInput'
 import AnalysisResult from '../components/features/dashboard/AnalysisResult'
 import { navMain, navAnalysis } from '../constants/nav'
 import { analyzeMail } from '../lib/api'
-import type { AnalysisResult as ResultType } from '../types'
+import { saveMail } from '../lib/mailService'
+import type { AnalysisResult as ResultType, Page } from '../types'
 
-export default function DashboardPage() {
+interface Props {
+  onNavigate?: (page: Page) => void
+  activePage?: Page
+}
+
+export default function DashboardPage({ onNavigate, activePage }: Props) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [mailInput, setMailInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -30,6 +36,7 @@ export default function DashboardPage() {
         dark: prev.dark + (parsed.darkdata?.length ?? 0),
         alerts: prev.alerts + (parsed.security?.level === 'danger' ? 1 : 0),
       }))
+      await saveMail(text, parsed)
     } catch {
       alert('분석 중 오류가 발생했습니다. API 키를 확인해주세요.')
     } finally {
@@ -44,7 +51,9 @@ export default function DashboardPage() {
         analysisNav={navAnalysis}
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
-        />
+        activePage={activePage}
+        onNavigate={onNavigate}
+      />
 
       <main className="lg:ml-60 flex-1 flex flex-col min-h-screen w-full">
         <Topbar

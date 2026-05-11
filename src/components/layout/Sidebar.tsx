@@ -1,13 +1,15 @@
-import type { NavItem } from '../../types'
+import type { NavItem, Page } from '../../types'
 
 interface Props {
   mainNav: NavItem[]
   analysisNav: NavItem[]
   open: boolean
   onClose: () => void
+  activePage?: Page
+  onNavigate?: (page: Page) => void
 }
 
-export default function Sidebar({ mainNav, analysisNav, open, onClose }: Props) {
+export default function Sidebar({ mainNav, analysisNav, open, onClose, activePage, onNavigate }: Props) {
   return (
     <>
       {/* Mobile backdrop */}
@@ -44,13 +46,13 @@ export default function Sidebar({ mainNav, analysisNav, open, onClose }: Props) 
 
         <nav className="flex-1 px-3 py-4 overflow-y-auto">
           <NavGroup label="메뉴">
-            {mainNav.map((item, i) => (
-              <NavLink key={item.label} item={item} active={i === 0} onClick={onClose} />
+            {mainNav.map(item => (
+              <NavLink key={item.label} item={item} active={activePage === item.page} onClick={onClose} onNavigate={onNavigate} />
             ))}
           </NavGroup>
           <NavGroup label="분석">
             {analysisNav.map(item => (
-              <NavLink key={item.label} item={item} onClick={onClose} />
+              <NavLink key={item.label} item={item} onClick={onClose} onNavigate={onNavigate} />
             ))}
           </NavGroup>
         </nav>
@@ -80,10 +82,14 @@ function NavGroup({ label, children }: { label: string; children: React.ReactNod
   )
 }
 
-function NavLink({ item, active, onClick }: { item: NavItem; active?: boolean; onClick?: () => void }) {
+function NavLink({ item, active, onClick, onNavigate }: { item: NavItem; active?: boolean; onClick?: () => void; onNavigate?: (page: Page) => void }) {
+  function handleClick() {
+    if (item.page && onNavigate) onNavigate(item.page)
+    onClick?.()
+  }
   return (
     <div
-      onClick={onClick}
+      onClick={handleClick}
       className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-body cursor-pointer transition-all duration-150
         ${active
           ? 'bg-brand/10 text-brand-pale'
