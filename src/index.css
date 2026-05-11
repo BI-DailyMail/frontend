@@ -20,7 +20,7 @@
   --color-brand-pale: #38bdf8;  /* 사이드바 active 텍스트 */
 
   /* ── Surfaces ───────────────────────────────────────── */
-  --color-surface: #f1f5f9;   /* 페이지 배경 */
+  --color-surface: #eef2f8;   /* 페이지 배경 */
   --color-field:   #f8fafc;   /* 입력 필드 배경 */
   --color-dark:    #0f172a;   /* 사이드바, 버튼, 로그인 왼쪽 패널 */
   --color-darker:  #0a0f1a;   /* 로그인 왼쪽 패널 */
@@ -40,6 +40,8 @@
   body {
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    background: linear-gradient(135deg, #e8f0fe 0%, #eef2f8 40%, #e8f4fd 100%);
+    min-height: 100vh;
   }
 
   #root { min-height: 100vh; }

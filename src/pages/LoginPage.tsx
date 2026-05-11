@@ -12,12 +12,19 @@ export default function LoginPage({ onLogin }: Props) {
   const [password, setPassword] = useState('')
 
   return (
-    <div className="min-h-screen bg-surface flex items-center justify-center p-4 sm:p-6">
-      <div className="flex w-full max-w-2xl rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-black/5">
+    <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+      <div className="flex w-full max-w-2xl rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(14,165,233,0.15),0_8px_40px_rgba(0,0,0,0.12)] border border-black/5">
 
         {/* Left panel — hidden on mobile */}
-        <div className="hidden md:flex w-2/5 shrink-0 bg-darker flex-col px-8 py-10">
-          <div className="mb-auto">
+        <div className="hidden md:flex w-2/5 shrink-0 flex-col px-8 py-10 relative overflow-hidden"
+          style={{ background: 'linear-gradient(160deg, #0a0f1a 0%, #0c1e3e 45%, #0a1a30 100%)' }}>
+          {/* 글로우 장식 */}
+          <div className="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10 blur-3xl pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #38bdf8, transparent)' }} />
+          <div className="absolute bottom-10 left-0 w-32 h-32 rounded-full opacity-10 blur-2xl pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #0ea5e9, transparent)' }} />
+
+          <div className="mb-auto relative">
             <p className="font-serif text-hero font-bold text-white tracking-tight leading-tight">
               매일메일
             </p>

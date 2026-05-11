@@ -28,7 +28,7 @@ export default function InboxPage({ onNavigate, activePage }: Props) {
   }, [])
 
   return (
-    <div className="flex min-h-screen bg-[#f1f5f9]">
+    <div className="flex min-h-screen bg-transparent">
       <Sidebar
         mainNav={navMain}
         analysisNav={navAnalysis}

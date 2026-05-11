@@ -45,7 +45,7 @@ export default function DarkDataPage({ onNavigate, activePage }: Props) {
   const selectedMail = filtered.find(m => m.id === selectedId) ?? filtered[0] ?? null
 
   return (
-    <div className="flex min-h-screen bg-[#f1f5f9]">
+    <div className="flex min-h-screen bg-transparent">
       <Sidebar
         mainNav={navMain}
         analysisNav={navAnalysis}

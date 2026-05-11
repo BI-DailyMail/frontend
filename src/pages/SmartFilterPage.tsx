@@ -69,7 +69,7 @@ export default function SmartFilterPage({ onNavigate, activePage }: Props) {
   const inactiveCount = keywords.filter(k => !k.is_active).length
 
   return (
-    <div className="flex min-h-screen bg-[#f1f5f9]">
+    <div className="flex min-h-screen bg-transparent">
       <Sidebar
         mainNav={navMain}
         analysisNav={navAnalysis}

@@ -8,7 +8,8 @@ interface Props {
 
 export default function Topbar({ title, subtitle, onMenuClick }: Props) {
   return (
-    <header className="bg-white border-b border-slate-200 px-4 md:px-7 py-4 flex items-center justify-between sticky top-0 z-40">
+    <header className="bg-white px-4 md:px-7 py-4 flex items-center justify-between sticky top-0 z-40"
+      style={{ borderBottom: '1px solid', borderImage: 'linear-gradient(90deg, #e2e8f0, #bfdbfe 50%, #e2e8f0) 1' }}>
       <div className="flex items-center gap-3">
         {/* Hamburger — mobile only */}
         <button
