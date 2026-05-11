@@ -41,21 +41,82 @@ AI 기반 스마트 이메일 센티널
 
 ### 프론트엔드
 
-- **Framework**: React 18 + TypeScript
-- **스타일링**: Tailwind CSS
-- **상태관리**: Zustand
+- **Framework**: React 19 + TypeScript
+- **스타일링**: Tailwind CSS v4
 - **빌드 도구**: Vite
 
-### 백엔드
+### 백엔드 (예정)
 
-- **Language**: Python 3.11
-- **Framework**: FastAPI
-- **DB**: MySQL
-- **ORM**: SQLAlchemy
+- **AI**: Gemini API
+- **DB**: Supabase (PostgreSQL)
 
-## 실행 방법
+---
+
+## ⚙️ 로컬 실행 방법
+
+### 1. 패키지 설치
 
 ```bash
 npm install
+```
+
+### 2. 환경 변수 설정
+
+프로젝트 루트에 `.env.local` 파일 생성 후 아래 내용 입력:
+
+```
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+```
+
+> Supabase 키는 [Supabase 대시보드](https://supabase.com/dashboard) → 프로젝트 선택 → Settings → API 에서 확인
+
+### 3. Supabase 테이블 설정
+
+Supabase에서 아래 테이블을 생성하고 RLS를 비활성화하세요.
+
+**tb_user**
+| 컬럼 | 타입 |
+|---|---|
+| id | int8 (PK) |
+| email | varchar |
+| name | varchar |
+| created_at | timestamptz |
+
+**tb_mail**
+| 컬럼 | 타입 |
+|---|---|
+| id | int8 (PK) |
+| content | varchar |
+| is_dark | bool |
+| dark_reason | varchar |
+| security_level | varchar |
+| user_id | int8 |
+| created_at | timestamptz |
+
+**tb_spam_keywords**
+| 컬럼 | 타입 |
+|---|---|
+| id | int8 (PK) |
+| keyword | varchar |
+| is_active | bool |
+| created_at | timestamptz |
+
+### 4. 개발 서버 실행
+
+```bash
 npm run dev
 ```
+
+---
+
+## 📱 화면 구성
+
+| 화면 | 설명 |
+|---|---|
+| 로그인 | 서비스 진입 화면 |
+| 대시보드 | 메일 수동 분석 및 통계 |
+| 받은 메일함 | 전체 메일 시간순 목록 |
+| 보안 센터 | 위험/주의/안전 등급별 분류 |
+| 다크 데이터 | 피싱·스팸·불필요 데이터 감지 메일 |
+| 스마트 필터 | 스팸 키워드 직접 관리 |
