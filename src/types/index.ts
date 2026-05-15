@@ -13,6 +13,7 @@ export interface DarkDataItem {
 }
 
 export interface AnalysisResult {
+  subject: string
   summary: string
   security: { level: SecurityLevel; issues: SecurityIssue[] }
   darkdata: DarkDataItem[]
@@ -20,6 +21,7 @@ export interface AnalysisResult {
 
 export interface MailRecord {
   id: number
+  subject: string | null
   content: string
   is_dark: boolean
   dark_reason: string | null

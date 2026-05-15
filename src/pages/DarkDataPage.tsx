@@ -42,7 +42,7 @@ export default function DarkDataPage({ onNavigate, activePage }: Props) {
     dark:     mails.filter(isDarkOnly).length,
   }
 
-  const selectedMail = filtered.find(m => m.id === selectedId) ?? filtered[0] ?? null
+  const selectedMail = filtered.find(m => m.id === selectedId) ?? null
 
   return (
     <div className="flex min-h-screen bg-transparent">
@@ -57,7 +57,7 @@ export default function DarkDataPage({ onNavigate, activePage }: Props) {
       <main className="lg:ml-60 flex-1 flex flex-col min-h-screen w-full">
         <Topbar
           title="다크 데이터"
-          subtitle="피싱·스팸·민감 정보가 포함된 메일을 확인하세요"
+          subtitle="피싱·스팸·불필요 데이터가 포함된 메일을 확인하세요"
           onMenuClick={() => setSidebarOpen(true)}
         />
         <div className="p-4 md:p-7 flex flex-col gap-4 md:gap-5">
@@ -84,7 +84,7 @@ export default function DarkDataPage({ onNavigate, activePage }: Props) {
                       key={mail.id}
                       mail={mail}
                       selected={selectedMail?.id === mail.id}
-                      onClick={() => setSelectedId(mail.id)}
+                      onClick={() => setSelectedId(prev => prev === mail.id ? null : mail.id)}
                     />
                   ))}
                 </div>
@@ -167,7 +167,8 @@ function MailCard({ mail, selected, onClick }: { mail: MailRecord; selected: boo
         )}
         <span className="ml-auto text-hint text-slate-400">{timeAgo(mail.created_at)}</span>
       </div>
-      <p className="text-body text-slate-600 line-clamp-2 leading-relaxed">{mail.content}</p>
+      <p className="text-body text-dark font-medium line-clamp-1 leading-snug">{extractSubject(mail, true)}</p>
+      <p className="text-caption text-slate-400 line-clamp-1 mt-0.5">{mail.content}</p>
     </div>
   )
 }
@@ -207,6 +208,7 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
             <p className="text-caption text-slate-400 mt-0.5">{new Date(mail.created_at).toLocaleString('ko-KR')}</p>
           </div>
         </div>
+        <p className="text-body font-semibold text-dark mt-3">{extractSubject(mail)}</p>
       </div>
 
       <div className="px-5 py-5 flex flex-col gap-5">
@@ -347,6 +349,23 @@ function EmptyState({ tab }: { tab: Tab }) {
 }
 
 /* ── Utils ───────────────────────────────────────────────── */
+
+function extractSubject(mail: MailRecord, truncate = false): string {
+  if (mail.subject) return mail.subject
+  const content = mail.content
+  const bracketMatch = content.match(/^\[([^\]]+)\]\s*(.*)/)
+  if (bracketMatch) {
+    const tag = bracketMatch[1]
+    const rest = bracketMatch[2].split(/[.。]/)[0].trim()
+    const full = rest ? `[${tag}] ${rest}` : `[${tag}]`
+    if (!truncate) return full
+    return rest.length > 15 ? `[${tag}] ${rest.slice(0, 15)}…` : full
+  }
+  const cleaned = content.replace(/^안녕하세요[,!.]?\s*/i, '').trim()
+  const first = cleaned.split(/[.!?。\n]/)[0].trim()
+  if (!truncate) return first
+  return first.length > 20 ? first.slice(0, 20) + '…' : first
+}
 
 function timeAgo(iso: string): string {
   const diff = Date.now() - new Date(iso).getTime()

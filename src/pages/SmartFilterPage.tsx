@@ -103,7 +103,7 @@ export default function SmartFilterPage({ onNavigate, activePage }: Props) {
                 color="text-slate-500"
                 bg="bg-slate-100"
                 iconStroke="#94a3b8"
-                icon="pause"
+                icon="x"
               />
             </div>
           )}
@@ -116,13 +116,13 @@ export default function SmartFilterPage({ onNavigate, activePage }: Props) {
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleAdd()}
               placeholder="차단할 키워드 입력 (예: 무료 수령, 긴급 처리)"
-              className="flex-1 text-body text-dark placeholder-slate-300 bg-transparent outline-none"
+              className="flex-1 text-body text-dark placeholder-slate-400 bg-transparent outline-none"
             />
             <button
               onClick={handleAdd}
               disabled={!input.trim() || adding}
               className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand text-white text-body font-medium
-                disabled:opacity-40 disabled:cursor-not-allowed hover:bg-brand-dark transition-colors duration-150 shrink-0"
+                disabled:opacity-60 disabled:cursor-not-allowed hover:bg-brand-dark transition-colors duration-150 shrink-0"
             >
               {adding ? (
                 <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -210,19 +210,19 @@ function KeywordRow({ keyword: kw, last, dimmed, onToggle, onDelete }: {
   onDelete: (id: number) => void
 }) {
   return (
-    <div className={`flex items-center gap-3 px-4 py-3 ${!last ? 'border-b border-slate-100' : ''} ${dimmed ? 'opacity-50' : ''}`}>
+    <div className={`flex items-center gap-3 px-4 py-3 ${!last ? 'border-b border-slate-100' : ''}`}>
       {/* 키워드 */}
       <div className={`w-2 h-2 rounded-full shrink-0 ${kw.is_active ? 'bg-brand' : 'bg-slate-300'}`} />
-      <span className="flex-1 text-body text-dark font-medium">{kw.keyword}</span>
+      <span className={`flex-1 text-body font-medium ${dimmed ? 'text-slate-400' : 'text-dark'}`}>{kw.keyword}</span>
 
       {/* 토글 */}
       <button
         onClick={() => onToggle(kw.id, kw.is_active)}
-        className={`relative w-9 h-5 rounded-full transition-colors duration-200 shrink-0
+        className={`relative w-9 h-5 rounded-full transition-colors duration-200 shrink-0 overflow-hidden
           ${kw.is_active ? 'bg-brand' : 'bg-slate-200'}`}
       >
-        <span className={`absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200
-          ${kw.is_active ? 'translate-x-4' : 'translate-x-0.5'}`}
+        <span className={`absolute top-0.5 left-0 w-4 h-4 bg-white rounded-full shadow-sm transition-transform duration-200
+          ${kw.is_active ? 'translate-x-[18px]' : 'translate-x-0.5'}`}
         />
       </button>
 
@@ -245,7 +245,7 @@ function KeywordRow({ keyword: kw, last, dimmed, onToggle, onDelete }: {
 /* ── Stat Chip ───────────────────────────────────────────── */
 
 function StatChip({ label, value, color, bg, iconStroke, icon }: {
-  label: string; value: number; color: string; bg: string; iconStroke: string; icon: 'check' | 'pause'
+  label: string; value: number; color: string; bg: string; iconStroke: string; icon: 'check' | 'x'
 }) {
   return (
     <div className="bg-white border border-slate-200 rounded-xl px-4 py-3.5 flex items-center gap-3">
@@ -256,7 +256,7 @@ function StatChip({ label, value, color, bg, iconStroke, icon }: {
           </svg>
         ) : (
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={iconStroke} strokeWidth="2.5" strokeLinecap="round">
-            <line x1="10" y1="5" x2="10" y2="19" /><line x1="14" y1="5" x2="14" y2="19" />
+            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         )}
       </div>

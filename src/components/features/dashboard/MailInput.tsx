@@ -22,7 +22,7 @@ export default function MailInput({ value, onChange, onAnalyze, loading }: Props
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-3">
         <p className="text-caption text-slate-400 order-2 sm:order-1">
-          Claude AI가 요약 · 보안 위협 · 다크 데이터를 자동 분석합니다
+          Gemini AI가 요약 · 보안 위협 · 다크 데이터를 자동 분석합니다
         </p>
         <button
           onClick={onAnalyze}

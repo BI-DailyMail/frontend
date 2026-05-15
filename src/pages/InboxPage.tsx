@@ -60,7 +60,7 @@ export default function InboxPage({ onNavigate, activePage }: Props) {
                       mail={mail}
                       selected={selectedMail?.id === mail.id}
                       last={i === mails.length - 1}
-                      onClick={() => setSelectedId(mail.id)}
+                      onClick={() => setSelectedId(prev => prev === mail.id ? null : mail.id)}
                     />
                   ))}
                 </div>
@@ -124,7 +124,8 @@ function MailRow({ mail, selected, last, onClick }: {
           )}
           <span className="ml-auto text-hint text-slate-400 shrink-0">{timeAgo(mail.created_at)}</span>
         </div>
-        <p className="text-body text-slate-600 line-clamp-1 leading-relaxed">{mail.content}</p>
+        <p className="text-body text-dark font-medium line-clamp-1 leading-snug">{extractSubject(mail, true)}</p>
+        <p className="text-caption text-slate-400 line-clamp-1 mt-0.5">{mail.content}</p>
       </div>
     </div>
   )
@@ -153,6 +154,9 @@ function MailDetail({ mail }: { mail: MailRecord }) {
           </div>
           <p className="text-caption text-slate-400 mt-0.5">{new Date(mail.created_at).toLocaleString('ko-KR')}</p>
         </div>
+      </div>
+      <div className="px-5 py-4 border-b border-slate-100">
+        <p className="text-body font-semibold text-dark">{extractSubject(mail)}</p>
       </div>
       <div className="px-5 py-5">
         <p className="text-body text-slate-700 leading-[1.8] whitespace-pre-wrap">{mail.content}</p>
@@ -196,6 +200,25 @@ function EmptyState() {
 }
 
 /* ── Utils ───────────────────────────────────────────────── */
+
+function extractSubject(mail: MailRecord, truncate = false): string {
+  if (mail.subject) return mail.subject
+
+  const content = mail.content
+  const bracketMatch = content.match(/^\[([^\]]+)\]\s*(.*)/)
+  if (bracketMatch) {
+    const tag = bracketMatch[1]
+    const rest = bracketMatch[2].split(/[.。]/)[0].trim()
+    const full = rest ? `[${tag}] ${rest}` : `[${tag}]`
+    if (!truncate) return full
+    return rest.length > 15 ? `[${tag}] ${rest.slice(0, 15)}…` : full
+  }
+
+  const cleaned = content.replace(/^안녕하세요[,!.]?\s*/i, '').trim()
+  const first = cleaned.split(/[.!?。\n]/)[0].trim()
+  if (!truncate) return first
+  return first.length > 20 ? first.slice(0, 20) + '…' : first
+}
 
 function timeAgo(iso: string): string {
   const diff = Date.now() - new Date(iso).getTime()

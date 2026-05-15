@@ -3,6 +3,7 @@ import type { AnalysisResult } from '../types'
 const buildPrompt = (text: string) => `아래 이메일을 분석해서 반드시 JSON만 반환하세요. 다른 텍스트나 마크다운 없이 JSON만.
 
 {
+  "subject": "메일 핵심을 담은 짧은 제목 (15자 이내)",
   "summary": "메일 전체 내용을 2-3문장으로 요약",
   "security": {
     "level": "safe/warn/danger",

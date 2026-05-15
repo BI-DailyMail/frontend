@@ -1,5 +1,3 @@
-import Badge from '../ui/Badge'
-
 interface Props {
   title: string
   subtitle?: string
@@ -27,7 +25,6 @@ export default function Topbar({ title, subtitle, onMenuClick }: Props) {
           {subtitle && <p className="text-xs text-slate-500 mt-0.5 hidden sm:block">{subtitle}</p>}
         </div>
       </div>
-      <Badge color="green" dot>보안 강화 모드</Badge>
     </header>
   )
 }

@@ -27,6 +27,7 @@ export async function saveMail(content: string, result: AnalysisResult): Promise
     .from('tb_mail')
     .insert({
       content,
+      subject: result.subject || null,
       is_dark: result.darkdata.length > 0,
       dark_reason: buildDarkReason(result) || null,
       security_level: result.security.level,
