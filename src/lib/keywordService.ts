@@ -1,41 +1,35 @@
-import { supabase } from './supabase'
 import type { SpamKeyword } from '../types'
 
-export async function fetchKeywords(): Promise<SpamKeyword[]> {
-  const { data, error } = await supabase
-    .from('tb_spam_keywords')
-    .select('*')
-    .order('created_at', { ascending: false })
+const API_URL = import.meta.env.VITE_API_URL ?? ''
 
-  if (error) throw error
-  return (data ?? []) as SpamKeyword[]
+export async function fetchKeywords(): Promise<SpamKeyword[]> {
+  const response = await fetch(`${API_URL}/api/keywords`)
+  if (!response.ok) throw new Error(`API ${response.status}`)
+  return response.json()
 }
 
 export async function addKeyword(keyword: string): Promise<SpamKeyword> {
-  const { data, error } = await supabase
-    .from('tb_spam_keywords')
-    .insert({ keyword: keyword.trim(), is_active: true })
-    .select()
-    .single()
-
-  if (error) throw error
-  return data as SpamKeyword
+  const response = await fetch(`${API_URL}/api/keywords`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ keyword }),
+  })
+  if (!response.ok) throw new Error(`API ${response.status}`)
+  return response.json()
 }
 
 export async function toggleKeyword(id: number, is_active: boolean): Promise<void> {
-  const { error } = await supabase
-    .from('tb_spam_keywords')
-    .update({ is_active })
-    .eq('id', id)
-
-  if (error) throw error
+  const response = await fetch(`${API_URL}/api/keywords/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ is_active }),
+  })
+  if (!response.ok) throw new Error(`API ${response.status}`)
 }
 
 export async function deleteKeyword(id: number): Promise<void> {
-  const { error } = await supabase
-    .from('tb_spam_keywords')
-    .delete()
-    .eq('id', id)
-
-  if (error) throw error
+  const response = await fetch(`${API_URL}/api/keywords/${id}`, {
+    method: 'DELETE',
+  })
+  if (!response.ok) throw new Error(`API ${response.status}`)
 }

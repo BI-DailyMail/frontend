@@ -27,6 +27,7 @@ export default function SmartFilterPage({ onNavigate, activePage }: Props) {
   }, [])
 
   async function handleAdd() {
+    if (adding) return
     const trimmed = input.trim()
     if (!trimmed) return
     if (keywords.some(k => k.keyword === trimmed)) {
