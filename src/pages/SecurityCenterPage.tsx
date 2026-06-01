@@ -165,7 +165,8 @@ function MailCard({ mail, selected, onClick }: { mail: MailRecord; selected: boo
         <span className={`text-hint font-semibold uppercase tracking-wide ${LEVEL_TEXT[level]}`}>
           {LEVEL_LABEL[level]}
         </span>
-        <span className="ml-auto text-hint text-slate-400">{timeAgo(mail.created_at)}</span>
+        {mail.sender && <span className="text-hint text-slate-500 font-medium truncate">{mail.sender}</span>}
+        <span className="ml-auto text-hint text-slate-400 shrink-0">{timeAgo(mail.created_at)}</span>
       </div>
       <p className="text-body text-dark font-medium line-clamp-1 leading-snug">{extractSubject(mail, true)}</p>
       <p className="text-caption text-slate-400 line-clamp-1 mt-0.5">{mail.content}</p>
@@ -197,6 +198,7 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
           <div>
             <p className={`text-body font-semibold ${h.text}`}>{h.label}</p>
             <p className="text-caption text-slate-400 mt-0.5">
+              {mail.sender && <span className="text-slate-500 font-medium">{mail.sender} · </span>}
               {new Date(mail.created_at).toLocaleString('ko-KR')}
               {mail.is_dark && <span className="ml-2 text-warn font-medium">· 다크 데이터 포함</span>}
             </p>

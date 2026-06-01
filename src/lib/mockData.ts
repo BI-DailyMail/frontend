@@ -4,6 +4,7 @@ export const MOCK_MAILS: MailRecord[] = [
   {
     id: 1,
     subject: '[긴급] 계좌 이상 거래 감지 — 즉시 확인 요망',
+    sender: '국민은행 보안팀',
     content: `안녕하세요 고객님,
 
 국민은행 보안팀입니다. 고객님의 계좌에서 해외 비정상 거래가 감지되었습니다.
@@ -23,6 +24,7 @@ export const MOCK_MAILS: MailRecord[] = [
   {
     id: 3,
     subject: '[네이버] 로그인 차단 안내 — 비밀번호 재설정 필요',
+    sender: '네이버 계정보안센터',
     content: `안녕하세요,
 
 네이버 계정 보안팀에서 알립니다.
@@ -45,6 +47,7 @@ export const MOCK_MAILS: MailRecord[] = [
   {
     id: 4,
     subject: '[광고] 직장인 대출 한도 UP! 무심사 1,000만원 당일 승인',
+    sender: '빠른대출 고객센터',
     content: `안녕하세요!
 
 바쁜 직장인을 위한 특별 대출 상품을 안내드립니다.
@@ -68,6 +71,7 @@ export const MOCK_MAILS: MailRecord[] = [
   {
     id: 5,
     subject: '[광고] 오늘만! 건강기능식품 80% 할인 + 무료배송',
+    sender: '건강한하루 쇼핑몰',
     content: `안녕하세요 회원님!
 
 오늘 하루만 진행되는 특가 이벤트를 안내드립니다.
@@ -89,6 +93,7 @@ export const MOCK_MAILS: MailRecord[] = [
   {
     id: 6,
     subject: '계약서 초안 공유 — 검토 부탁드립니다',
+    sender: '이진수',
     content: `안녕하세요 김예원 님,
 
 지난 회의에서 논의했던 외주 계약서 초안을 공유드립니다.
@@ -111,6 +116,7 @@ export const MOCK_MAILS: MailRecord[] = [
   {
     id: 8,
     subject: '6월 팀 회식 일정 안내',
+    sender: '최민준',
     content: `안녕하세요 팀원 여러분,
 
 6월 팀 회식 일정을 안내드립니다.

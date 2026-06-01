@@ -22,6 +22,7 @@ export interface AnalysisResult {
 export interface MailRecord {
   id: number
   subject: string | null
+  sender?: string | null
   content: string
   is_dark: boolean
   dark_reason: string | null
