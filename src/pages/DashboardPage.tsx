@@ -6,6 +6,7 @@ import MailInput from '../components/features/dashboard/MailInput'
 import AnalysisResult from '../components/features/dashboard/AnalysisResult'
 import { navMain, navAnalysis } from '../constants/nav'
 import { analyzeMail } from '../lib/api'
+import { MOCK_STATS } from '../lib/mockData'
 import type { AnalysisResult as ResultType, Page } from '../types'
 
 interface Props {
@@ -18,7 +19,7 @@ export default function DashboardPage({ onNavigate, activePage }: Props) {
   const [mailInput, setMailInput] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<ResultType | null>(null)
-  const [stats, setStats] = useState({ total: 0, dark: 0, alerts: 0 })
+  const [stats, setStats] = useState(MOCK_STATS)
 
   async function handleAnalyze() {
     const text = mailInput.trim()
