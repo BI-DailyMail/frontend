@@ -231,15 +231,15 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
                 const desc  = colonIdx > -1 ? line.slice(colonIdx + 1).trim() : line
                 return (
                   <div key={i} className={`flex items-start gap-3 p-3 rounded-lg
-                    ${mail.security_level === 'danger' ? 'bg-danger-muted' : 'bg-orange-50'}`}>
+                    ${mail.security_level === 'danger' ? 'bg-danger-muted' : 'bg-orange-100'}`}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
-                      stroke={mail.security_level === 'danger' ? '#dc2626' : '#ea580c'}
+                      stroke={mail.security_level === 'danger' ? '#dc2626' : '#c2410c'}
                       strokeWidth="2" strokeLinecap="round" className="shrink-0 mt-0.5">
                       <circle cx="12" cy="12" r="10" />
                       <line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                     </svg>
                     <div>
-                      {label && <p className={`text-xs font-semibold ${mail.security_level === 'danger' ? 'text-danger' : 'text-warn'}`}>{label}</p>}
+                      {label && <p className={`text-xs font-semibold ${mail.security_level === 'danger' ? 'text-danger' : 'text-orange-700'}`}>{label}</p>}
                       <p className="text-caption text-slate-600 leading-relaxed mt-0.5">{desc}</p>
                     </div>
                   </div>
