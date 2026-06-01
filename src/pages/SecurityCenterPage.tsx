@@ -221,21 +221,21 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
           </p>
         </section>
 
-        {/* Dark reason */}
+        {/* 보안 분석 이유: 위험/주의 메일만 표시 */}
         <section>
           <p className="text-body font-semibold text-dark mb-3 flex items-center gap-2">
-            <span className="w-7 h-7 rounded-lg bg-danger-muted flex items-center justify-center">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b91c1c" strokeWidth="2" strokeLinecap="round">
+            <span className={`w-7 h-7 rounded-lg flex items-center justify-center ${mail.security_level === 'safe' ? 'bg-safe-muted' : 'bg-danger-muted'}`}>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={mail.security_level === 'safe' ? '#15803d' : '#b91c1c'} strokeWidth="2" strokeLinecap="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </span>
             보안 분석 이유
           </p>
-          {mail.dark_reason ? (
+          {mail.security_level !== 'safe' && mail.dark_reason ? (
             <div className="flex flex-col gap-2">
               {mail.dark_reason.split('\n').map((line, i) => (
-                <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-danger-muted">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" strokeWidth="2" strokeLinecap="round" className="shrink-0 mt-0.5">
+                <div key={i} className={`flex items-start gap-3 p-3 rounded-lg ${mail.security_level === 'danger' ? 'bg-danger-muted' : 'bg-warn-muted'}`}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={mail.security_level === 'danger' ? '#dc2626' : '#d97706'} strokeWidth="2" strokeLinecap="round" className="shrink-0 mt-0.5">
                     <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
                   </svg>
                   <p className="text-caption text-slate-600 leading-relaxed">{line}</p>

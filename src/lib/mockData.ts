@@ -81,7 +81,7 @@ export const MOCK_MAILS: MailRecord[] = [
 본 메일은 이전에 동의하신 마케팅 수신에 의해 발송되었습니다.
 수신 거부: 하단 링크 클릭`,
     is_dark: false,
-    dark_reason: null,
+    dark_reason: `비공식 도메인 사용: health-sale2026.kr은 식약처 등록 쇼핑몰이 아닙니다\n과장 광고 문구: "80% 할인", "오늘만" 등 충동 구매를 유도하는 스팸성 표현이 포함되어 있습니다`,
     security_level: 'warn',
     user_id: 1,
     created_at: '2026-05-26T13:10:00.000Z',
