@@ -7,6 +7,7 @@ import AnalysisResult from '../components/features/dashboard/AnalysisResult'
 import { navMain, navAnalysis } from '../constants/nav'
 import { analyzeMail } from '../lib/api'
 import { MOCK_STATS } from '../lib/mockData'
+import AdBanner from '../components/features/dashboard/AdBanner'
 import type { AnalysisResult as ResultType, Page } from '../types'
 
 interface Props {
@@ -76,6 +77,8 @@ export default function DashboardPage({ onNavigate, activePage }: Props) {
           />
 
           {result && !loading && <AnalysisResult result={result} />}
+
+          <AdBanner />
         </div>
       </main>
     </div>

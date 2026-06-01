@@ -179,3 +179,47 @@ export const MOCK_STATS = {
   dark: MOCK_MAILS.filter(m => m.is_dark).length,
   alerts: MOCK_MAILS.filter(m => m.security_level === 'danger').length,
 }
+
+export interface AdItem {
+  id: number
+  brand: string
+  tagline: string
+  desc: string
+  cta: string
+  badge: string
+  iconColor: string
+  iconBg: string
+}
+
+export const MOCK_ADS: AdItem[] = [
+  {
+    id: 1,
+    brand: 'SecureVault Pro',
+    tagline: '기업 메일 암호화 솔루션',
+    desc: '피싱·스팸으로부터 조직의 이메일을 완벽하게 보호하세요. 무료 14일 체험 제공.',
+    cta: '무료 체험 시작',
+    badge: '보안',
+    iconColor: '#0ea5e9',
+    iconBg: '#eff6ff',
+  },
+  {
+    id: 2,
+    brand: 'DataShield 기업보험',
+    tagline: '개인정보 유출 사고 대비',
+    desc: '다크데이터·개인정보 유출 시 법적 비용·배상금을 보장합니다. 중소기업 특화 플랜.',
+    cta: '보험료 견적 받기',
+    badge: '보험',
+    iconColor: '#15803d',
+    iconBg: '#f0fdf4',
+  },
+  {
+    id: 3,
+    brand: 'ComplianceAI',
+    tagline: '개인정보보호법 자동 점검',
+    desc: '메일·문서 내 민감정보를 AI가 실시간 탐지하고 컴플라이언스 리포트를 자동 생성합니다.',
+    cta: '데모 신청',
+    badge: '컴플라이언스',
+    iconColor: '#b45309',
+    iconBg: '#fffbeb',
+  },
+]
