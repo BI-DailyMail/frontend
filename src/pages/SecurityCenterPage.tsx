@@ -234,6 +234,7 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
             보안 분석 이유
           </p>
           {mail.security_level !== 'safe' && mail.dark_reason ? (
+            /* 위험/주의: 보안 위협 이유 */
             <div className="flex flex-col gap-2">
               {mail.dark_reason.split('\n').map((line, i) => (
                 <div key={i} className={`flex items-start gap-3 p-3 rounded-lg ${mail.security_level === 'danger' ? 'bg-danger-muted' : 'bg-warn-muted'}`}>
@@ -244,7 +245,21 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
                 </div>
               ))}
             </div>
+          ) : mail.security_level === 'safe' && mail.is_dark && mail.dark_reason ? (
+            /* 안전이지만 다크 데이터 포함: 다크 데이터 감지 이유 표시 */
+            <div className="flex flex-col gap-2">
+              <p className="text-hint text-slate-400 mb-1">보안 위협은 없으나 아래 항목이 다크 데이터로 감지되었습니다.</p>
+              {mail.dark_reason.split('\n').map((line, i) => (
+                <div key={i} className="flex items-start gap-3 p-3 rounded-lg bg-warn-muted">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2" strokeLinecap="round" className="shrink-0 mt-0.5">
+                    <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  <p className="text-caption text-slate-600 leading-relaxed">{line}</p>
+                </div>
+              ))}
+            </div>
           ) : (
+            /* 안전, 다크 데이터 없음 */
             <div className="flex items-start gap-3 p-3 rounded-lg bg-safe-muted">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" strokeWidth="2" strokeLinecap="round" className="shrink-0 mt-0.5">
                 <polyline points="20 6 9 17 4 12" />
