@@ -130,8 +130,8 @@ const ADS: AdItem[] = [
         <text x="96" y="46" fontFamily="sans-serif" fontSize="15" fontWeight="700" fill="white">ComplianceAI</text>
         <text x="96" y="64" fontFamily="sans-serif" fontSize="11" fill="#fdba74">개인정보보호법 자동 점검</text>
         {/* 퍼센트 */}
-        <text x="96" y="86" fontFamily="sans-serif" fontSize="20" fontWeight="800" fill="#fb923c">99.2%</text>
-        <text x="136" y="86" fontFamily="sans-serif" fontSize="11" fill="#fdba74"> 탐지 정확도</text>
+        <text x="96" y="82" fontFamily="sans-serif" fontSize="20" fontWeight="800" fill="#fb923c">99.2%</text>
+        <text x="96" y="96" fontFamily="sans-serif" fontSize="10" fill="#fdba74">탐지 정확도</text>
         <line x1="24" y1="106" x2="296" y2="106" stroke="#7c2d12" strokeOpacity="0.5" strokeWidth="1" />
         <text x="24" y="116" fontFamily="sans-serif" fontSize="9" fill="#475569">AD · 스폰서 광고</text>
       </svg>
