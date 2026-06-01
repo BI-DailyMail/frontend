@@ -54,7 +54,7 @@ export default function DarkDataPage({ onNavigate, activePage }: Props) {
         activePage={activePage}
         onNavigate={onNavigate}
       />
-      <main className="lg:ml-60 flex-1 flex flex-col min-h-screen w-full">
+      <main className="lg:ml-60 flex-1 flex flex-col w-full">
         <Topbar
           title="다크 데이터"
           subtitle="피싱·스팸·불필요 데이터가 포함된 메일을 확인하세요"
@@ -215,7 +215,7 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
         {/* 메일 내용 */}
         <section>
           <SectionLabel icon="mail" title="메일 내용" />
-          <p className="text-body text-slate-700 leading-[1.8] bg-field rounded-lg px-4 py-3 border border-slate-200 whitespace-pre-wrap line-clamp-6 mt-3">
+          <p className="text-body text-slate-700 leading-[1.8] bg-field rounded-lg px-4 py-3 border border-slate-200 whitespace-pre-wrap mt-3">
             {mail.content}
           </p>
         </section>

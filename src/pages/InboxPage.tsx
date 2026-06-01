@@ -37,7 +37,7 @@ export default function InboxPage({ onNavigate, activePage }: Props) {
         activePage={activePage}
         onNavigate={onNavigate}
       />
-      <main className="lg:ml-60 flex-1 flex flex-col min-h-screen w-full">
+      <main className="lg:ml-60 flex-1 flex flex-col w-full">
         <Topbar
           title="받은 메일함"
           subtitle={!loading && !error ? `${mails.length}개 메일` : '메일을 불러오는 중...'}

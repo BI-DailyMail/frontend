@@ -46,7 +46,7 @@ export default function SecurityCenterPage({ onNavigate, activePage }: Props) {
         activePage={activePage}
         onNavigate={onNavigate}
       />
-      <main className="lg:ml-60 flex-1 flex flex-col min-h-screen w-full">
+      <main className="lg:ml-60 flex-1 flex flex-col w-full">
         <Topbar
           title="보안 센터"
           subtitle="분석된 메일의 보안 등급을 확인하세요"
@@ -216,7 +216,7 @@ function DetailPanel({ mail }: { mail: MailRecord }) {
             </span>
             메일 내용
           </p>
-          <p className="text-body text-slate-700 leading-[1.8] bg-field rounded-lg px-4 py-3 border border-slate-200 whitespace-pre-wrap line-clamp-6">
+          <p className="text-body text-slate-700 leading-[1.8] bg-field rounded-lg px-4 py-3 border border-slate-200 whitespace-pre-wrap">
             {mail.content}
           </p>
         </section>

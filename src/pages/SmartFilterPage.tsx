@@ -79,7 +79,7 @@ export default function SmartFilterPage({ onNavigate, activePage }: Props) {
         activePage={activePage}
         onNavigate={onNavigate}
       />
-      <main className="lg:ml-60 flex-1 flex flex-col min-h-screen w-full">
+      <main className="lg:ml-60 flex-1 flex flex-col w-full">
         <Topbar
           title="스마트 필터"
           subtitle="스팸 키워드를 직접 관리하세요"

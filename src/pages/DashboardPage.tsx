@@ -55,7 +55,7 @@ export default function DashboardPage({ onNavigate, activePage }: Props) {
         onNavigate={onNavigate}
       />
 
-      <main className="lg:ml-60 flex-1 flex flex-col min-h-screen w-full">
+      <main className="lg:ml-60 flex-1 flex flex-col w-full">
         <Topbar
           title="대시보드"
           subtitle="메일을 붙여넣고 AI 분석을 시작하세요"
